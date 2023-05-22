@@ -1,0 +1,45 @@
+<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="https://gudlogo.com/wp-content/uploads/2019/04/logo-chu%CC%9B%CC%83-M-83.png" class="brand_logo" alt="Logo">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					{{#if flag}}
+						<form method="POST" action="http://localhost:3000/taikhoans/vertify">
+						<h1 class="text-title">QUẢN LÝ VẬT TƯ</h1>
+						<div class="message"><b>{{message}}</b></div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="text" name="vertifyID" class="form-control input_user" value="" placeholder="Nhập mã xác nhận">
+						</div>
+						<div class="form-group">
+						</div>
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 	<button type="submit" name="button" class="btn login_btn">Xác nhận</button>
+				   </div>
+					</form>
+					{{else}}
+					<form method="POST" action="http://localhost:3000/taikhoans/forgotpassword">
+						<h1 class="text-title">QUẢN LÝ VẬT TƯ</h1>
+						<div class="message"><b>{{message}}</b></div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" name="username" class="form-control input_user" value="" placeholder="username">
+						</div>
+						<div class="form-group">
+						</div>
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 	<button type="submit" name="button" class="btn login_btn">Lấy mã xác nhận</button>
+				   </div>
+					</form>
+					{{/if}}
+				</div>
+			</div>
+</div>

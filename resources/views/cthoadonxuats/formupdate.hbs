@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>QUẢN LÝ VẬT TƯ</title>
+        <!-- Favicon-->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles1.css" rel="stylesheet" />
+        <style>
+            .font {
+                font-size: 32px;
+            }
+            .navbar{
+                padding-bottom: 0.7rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">QUẢN LÝ VẬT TƯ</div>
+                <div class="list-group list-group-flush font-we">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/nhacungcaps">Nhà cung cấp</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hanghoas">Hàng hoá</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonnhaps">Phiếu nhập</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" style="background-color: #e5e5e5;" href="/hoadonxuats">Phiếu xuất</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khos">Kho</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/loaihangs">Loại hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonnhaps/thongke">Thống kê</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/nhanviens">Nhân viên</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khachhangs">Khách hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans">Tài khoản</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/infor">Thông tin</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/edit">Đổi mật khẩu</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/logout">Đăng xuất</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <b class="font mt-2 ml-2">CẬP NHẬT CHI TIẾT HOÁ ĐƠN XUẤT</b>
+                    <form class="ml-4 mt-1" action="/cthoadonxuats/{{cthoadonxuats.maHDX}}/{{cthoadonxuats.maHH}}?_method=PUT" method="POST" id ="editform">
+
+                        <div class="form-group">
+                          <label for="name">Số lượng</label>
+                          <input type="text" class="form-control" value="{{cthoadonxuats.soLuong}}" name="soLuong" id="soLuong" required="true" placeholder="Số lượng">
+                        </div>
+
+                        <div class="form-group">
+                          <label for="name">Đơn giá</label>
+                          <input type="text" class="form-control" value="{{cthoadonxuats.donGia}}" name="donGia" id="donGia" required="true" placeholder="Đơn giá">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary mt-2">Lưu lại</button>
+                      </form>
+                      
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>

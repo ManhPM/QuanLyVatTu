@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>QUẢN LÝ VẬT TƯ</title>
+        <!-- Favicon-->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#table_id').DataTable();
+            } );
+        </script>
+        <style>
+            .navbar{
+                padding-bottom: 0.7rem;
+            }
+            .active, .btn:hover {
+                background-color: #666;
+                color: white;
+            }
+            .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
+                margin-top: 10px;
+                font-weight: 600;
+            }
+            .dataTables_wrapper .dataTables_filter input{
+                background-color: #fff !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">QUẢN LÝ VẬT TƯ</div>
+                <div class="list-group list-group-flush font-we">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/nhacungcaps">Nhà cung cấp</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" style="background-color: #e5e5e5;" href="/hanghoas">Hàng hoá</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonnhaps">Phiếu nhập</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonxuats">Phiếu xuất</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khos">Kho</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/loaihangs">Loại hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonnhaps/thongke">Thống kê</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/nhanviens">Nhân viên</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khachhangs">Khách hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans">Tài khoản</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/infor">Thông tin</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/edit">Đổi mật khẩu</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/logout">Đăng xuất</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Menu</button>
+                        <a href="/hanghoas/show2" class="btn btn-primary" id="sidebarToggle">Hàng hoá chưa có hoá đơn</a>
+                        <a href="/hanghoas/new" class="btn btn-primary" id="sidebarToggle">Tạo mới</a>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <table id="table_id" class="table table-light">
+                        <thead>
+                          <tr>
+                            <th>Ảnh</th>
+                            <th scope="col">Hàng hoá</th>
+                            <th scope="col">Kho</th>
+                            <th scope="col">Loại hàng</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Xuất xứ</th>
+                            <th scope="col">Đơn vị</th>
+                            <th scope="col">Thao tác</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {{#each hanghoas}} 
+                          <tr>
+                            <td><img src="{{this.img}}" width="60px" height="60px"></td>
+                            <td>{{this.tenHH}}</td>
+                            <td>{{this.tenKho}}</td>
+                            <td>{{this.tenLoai}}</td>
+                            <td>{{this.soLuongTon}}</td>
+                            <td>{{this.xuatXu}}</td>
+                            <td>{{this.donViTinh}}</td>
+                            <td><a href="/hanghoas/{{this.maHH}}/edit" class="btn btn-primary">Sửa</a></td>
+                          </tr>
+                        {{/each}}
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>

@@ -1,131 +1,192 @@
-const {
-  sequelize,
-} = require("../../models");
-const { QueryTypes } = require("sequelize");
-const checkCreateAccount = (Model) => {
-  return async (req, res, next) => {
-    const { username } = req.body;
-    const account = await Model.findOne({
-      where: {
-        username,
-      },
-    });
-    if (!account) {
-      next();
-    } else {
-      res.status(400).json({ message: "Tài khoản đã tồn tại!" });
-    }
-  };
-};
-
-const checkEmail = (Model) => {
-  return async (req, res, next) => {
-    const { email } = req.body;
-    const account = await Model.findOne({
-      where: {
-        email,
-      },
-    });
-    if(account){
-      res.status(400).json({ message: "Email đã tồn tại!" });
-    }
-    else {
-      next();
-    }
-  };
-};
-const checkPhone = (Model) => {
-  return async (req, res, next) => {
-    const { phone } = req.body;
-    const account = await Model.findOne({
-      where: {
-        phone,
-      },
-    });
-    if(account){
-      res.status(400).json({ message: "Số điện thoại đã tồn tại!" });
-    }
-    else {
-      next();
-    }
-  };
-};
-
-const checkCreateItem = (Model) => {
-  return async (req, res, next) => {
-    const { name, price, id_type } = req.body;
-    const item = await Model.findOne({
-      where: {
-        name,
-        price,
-        id_type,
-      },
-    });
-    if (!item) {
-      next();
-    } else {
-      res.status(400).json({ message: "Sản phẩm đã tồn tại!" });
-    }
-  };
-};
-
-const checkCreateReview = (Model) => {
-  return async (req, res, next) => {
-    const { id_order } = req.query;
-    const order = await Model.findOne({
-      where: {
-        id_order,
-      },
-    });
-    if (order.status == 1) {
-      const check7day = await sequelize.query(
-        "SELECT O.id_customer, datediff(curdate(), O.datetime) as count FROM orders as O WHERE O.id_order = :id_order",
-        {
-          replacements: {
-            id_order: id_order,
-          },
-          type: QueryTypes.SELECT,
+const checkCreateTaiKhoan = (Model) => {
+    return async (req, res, next) => {
+        const {username} = req.body;
+        const taiKhoan = await Model.findOne({
+            where: {
+                username,
+            }
+        })
+        if(taiKhoan) {
+            res.status(404).render("taikhoans/notification", {
+                message: "username đã tồn tại!"
+            });
+        }else {
+            next();
         }
-      );
-      if (check7day[0].count <= 7) {
-        next();
-      } else {
-        res
-          .status(400)
-          .json({ message: "Đơn hàng đã vượt quá 7 ngày mua không thể đánh giá!" });
-      }
-    } else {
-      res
-        .status(400)
-        .json({ message: "Đơn hàng đã bị huỷ hoặc chưa được xác nhận. Không thể đánh giá!" });
-    }
-  };
+    };
 };
 
-const checkItemValue = (Model) => {
-  return async (req, res, next) => {
-    const { quantity, price, energy } = req.body;
-    if (quantity > 0) {
-      if (price > 0) {
-        if (energy > 0) {
-          next();
-        } else {
-          res.status(400).json({ message: "Năng lượng phải lớn hơn 0!" });
+const checkCreateNhanVien = (Model) => {
+    return async (req, res, next) => {
+        const { email } = req.body;
+        const nhanVien = await Model.findOne({
+            where: {
+                email,
+            }
+        })
+        if(nhanVien) {
+            res.status(404).render("nhanviens/notification", {
+                message: "nhân viên đã tồn tại!"
+            });
+        }else {
+            next();
         }
-      } else {
-        res.status(400).json({ message: "Giá phải lớn hơn 0!" });
-      }
-    } else {
-      res.status(400).json({ message: "Số lượng phải lớn hơn 0!" });
-    }
-  };
+    };
 };
 
+const checkCreateNhaCungCap = (Model) => {
+    return async (req, res, next) => {
+        const { tenNCC } = req.body;
+        const nhaCungCap = await Model.findOne({
+            where: {
+                tenNCC,
+            }
+        })
+        if(nhaCungCap) {
+            res.status(404).render("nhacungcaps/notification", {
+                message: "nhà cung cấp đã tồn tại!"
+            });
+        }else {
+            next();
+        }
+    };
+};
+
+const checkCreateLoaiHang = (Model) => {
+    return async (req, res, next) => {
+        const { tenLoai } = req.body;
+        const loaiHang = await Model.findOne({
+            where: {
+                tenLoai,
+            }
+        })
+        if(loaiHang) {
+            res.status(404).render("loaihangs/notification", {
+                message: "loại hàng đã tồn tại!"
+            });
+        }else {
+            next();
+        }
+    };
+};
+
+const checkCreatePhanQuyen = (Model) => {
+    return async (req, res, next) => {
+        const { tenQuyen } = req.body;
+        const phanQuyen = await Model.findOne({
+            where: {
+                tenQuyen,
+            }
+        })
+        if(phanQuyen) {
+            res.status(404).send(`Phân quyền đã tồn tại!`);
+        }else {
+            next();
+        }
+    };
+};
+
+const checkCreateKho = (Model) => {
+    return async (req, res, next) => {
+        const { tenKho } = req.body;
+        const Kho = await Model.findOne({
+            where: {
+                tenKho,
+            }
+        })
+        if(Kho) {
+            res.status(404).render("khos/notification", {
+                message: "Kho đã tồn tại!"
+            });
+        }else {
+            next();
+        }
+    };
+};
+
+const checkCreateHangHoa = (Model) => {
+    return async (req, res, next) => {
+        const { tenHH } = req.body;
+        const hangHoa = await Model.findOne({
+            where: {
+                tenHH,
+            }
+        })
+        if(hangHoa) {
+            res.status(404).render("hanghoas/notification", {
+                message: "hàng hoá đã tồn tại!"
+            });
+        }else {
+            next();
+        }
+    };
+};
+
+const checkCreateCTHoaDonNhap = (Model) => {
+    return async (req, res, next) => {
+        const { maHDN, maHH } = req.body;
+        const ctHoaDonNhap = await Model.findOne({
+            where: {
+                maHDN,
+                maHH,
+            }
+        })
+        if(ctHoaDonNhap) {
+            res.status(404).render("hoadonnhaps/notification", {
+                message: "hoá đơn đã tồn tại hàng hoá!"
+            });
+        }else {
+            next();
+        }
+    };
+};
+
+const checkCreateCTHoaDonXuat = (Model) => {
+    return async (req, res, next) => {
+        const { maHDX, maHH } = req.body;
+        const ctHoaDonXuat = await Model.findOne({
+            where: {
+                maHDX,
+                maHH,
+            }
+        })
+        if(ctHoaDonXuat) {
+            res.status(404).render("hoadonxuats/notification", {
+                message: "hoá đơn đã tồn tại hàng hoá!"
+            });
+        }else {
+            next();
+        }
+    };
+};
+
+const checkCreateKhachHang = (Model) => {
+    return async (req, res, next) => {
+        const { sdt } = req.body;
+        const khachHang = await Model.findOne({
+            where: {
+                sdt,
+            }
+        })
+        if(khachHang) {
+            res.status(404).render("khachhangs/notification", {
+                message: "khách hàng đã tồn tại!"
+            });
+        }else {
+            next();
+        }
+    };
+};
 module.exports = {
-  checkCreateAccount,
-  checkCreateItem,
-  checkItemValue,
-  checkCreateReview,
-  checkEmail,
-  checkPhone,
-};
+    checkCreateTaiKhoan,
+    checkCreateNhanVien,
+    checkCreateNhaCungCap,
+    checkCreateLoaiHang,
+    checkCreatePhanQuyen,
+    checkCreateKho,
+    checkCreateHangHoa,
+    checkCreateCTHoaDonNhap,
+    checkCreateCTHoaDonXuat,
+    checkCreateKhachHang
+
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>QUẢN LÝ VẬT TƯ</title>
+        <!-- Favicon-->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready( function () {
+                $('#table_id').DataTable();
+            } );
+        </script>
+        <style>
+            .btn-red{
+                background-color: red;
+                border-color: red;
+            }
+            .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{
+                margin-top: 10px;
+                font-weight: 600;
+            }
+            .dataTables_wrapper .dataTables_filter input{
+                background-color: #fff !important;
+            }
+            .active, .btn:hover {
+                background-color: #666;
+                color: white;
+            }
+            .navbar{
+                padding-bottom: 0.7rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">QUẢN LÝ VẬT TƯ</div>
+                <div class="list-group list-group-flush font-we">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" style="background-color: #e5e5e5;" href="/nhacungcaps">Nhà cung cấp</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hanghoas">Hàng hoá</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonnhaps">Phiếu nhập</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonxuats">Phiếu xuất</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khos">Kho</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/loaihangs">Loại hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonnhaps/thongke">Thống kê</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/nhanviens">Nhân viên</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khachhangs">Khách hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans">Tài khoản</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/infor">Thông tin</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/edit">Đổi mật khẩu</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/logout">Đăng xuất</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Menu</button>
+                        <a href="/nhacungcaps/new" class="btn btn-primary" id="sidebarToggle">Tạo mới</a>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <table id="table_id" class="table table-light">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nhà cung cấp</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">SDT</th>
+                            <th scope="col-span">Sửa</th>
+                            <th scope="col">Xoá</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {{#each nhacungcaps}}
+                            
+                          <tr>
+                            <td>{{this.tenNCC}}</td>
+                            <td>{{this.diaChi}}</td>
+                            <td>{{this.sdt}}</td>
+                            <td><a href="/nhacungcaps/{{this.maNCC}}/edit" class="btn btn-primary">Sửa</a></td>
+                            <td><form action="/nhacungcaps/{{this.maNCC}}?_method=DELETE" method="POST">
+                            <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xoá?')" class="btn-red btn btn-primary">Xoá</button></form></td>
+                          </tr>
+                          </tr>
+                        {{/each}}
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>

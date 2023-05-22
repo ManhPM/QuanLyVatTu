@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>QUẢN LÝ VẬT TƯ</title>
+        <!-- Favicon-->
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+        <style>
+            .btn-red{
+                background-color: red;
+                border-color: red;
+            }
+            .bg-lime{
+                background-color: lime;
+            }
+            #chart-wrapper {
+                position: relative;
+                width: 300px;
+                margin: auto;
+            }
+            #bg-img {
+                background-image: url(https://w0.peakpx.com/wallpaper/966/130/HD-wallpaper-red-environment-thumbnail.jpg);
+            }
+            .main_chart-wrapper{
+                display: flex;
+            }
+            .navbar{
+                padding-bottom: 0.7rem;
+            }
+            .list-group-item + .list-group-item{
+                height: 45px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom bg-light">QUẢN LÝ VẬT TƯ</div>
+                <div class="list-group list-group-flush font-we">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/nhacungcaps">Nhà cung cấp</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hanghoas">Hàng hoá</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonnhaps">Phiếu nhập</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/hoadonxuats">Phiếu xuất</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khos">Kho</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/loaihangs">Loại hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" style="background-color: #e5e5e5;" href="/hoadonnhaps/thongke">Thống kê</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/nhanviens">Nhân viên</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/khachhangs">Khách hàng</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans">Tài khoản</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/infor">Thông tin</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/edit">Đổi mật khẩu</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 main-menu" href="/taikhoans/logout">Đăng xuất</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div  id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Menu</button>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    <form action="/hoadonnhaps/thongke" method="POST" id="carform">
+                        <div class="form-group mt-2">
+                          <input type="text" id="tuNgay" name="tuNgay" minlength="10" maxlength="10" size="10" placeholder="Từ ngày">
+                        </div>
+                        <div class="form-group">
+                          <input type="text" id="denNgay" name="denNgay" minlength="10" maxlength="10" size="10" placeholder="Đến ngày">
+                          <button type="submit" class="btn btn-primary">Lọc</button>
+                        </div>
+                    </form>
+                    <div class="container mt-2">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6">
+                            <div class="card card-block bg-gradient">
+                            <h4 class="card-title text-right text-center"><i class="material-icons">Tổng số hàng hoá</i></h4>
+                            <img src="https://als.com.vn/api/file-management/file-descriptor/view/532631f1-35f6-dcdc-ed31-39ff41abe9dc" height="200px" alt="Photo of sunset">
+                                <h5 class="card-title mt-3 mb-3 text-center">{{soLuongHangHoa}}</h5>
+                            </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                            <div class="card card-block bg-lime">
+                            <h4 class="card-title text-right text-center"><i class="material-icons">Tổng nhập</i></h4>
+                            <img src="https://static.pexels.com/photos/7357/startup-photos.jpg" height="200px" alt="Photo of sunset">
+                                <h5 id="tongnhap" class="card-title mt-3 mb-3 text-center">{{tongNhap}}đ</h5>
+                            </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                            <div class="card card-block bg-danger">
+                            <h4 class="card-title text-right text-center"><i class="material-icons">Doanh thu</i></h4>
+                            <img src="https://static.pexels.com/photos/262550/pexels-photo-262550.jpeg" height="200px" alt="Photo of sunset">
+                                <h5 id="tongxuat" class="card-title mt-3 mb-3 text-center">{{tongXuat}}đ</h5>
+                            </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                            <div class="card card-block bg-warning">
+                            <h4 class="card-title text-right text-center"><i class="material-icons">Tổng số nhân viên</i></h4>
+                            <img src="https://static.pexels.com/photos/326424/pexels-photo-326424.jpeg" height="200px" alt="Photo of sunset">
+                            <h5 id="doanhthu" class="card-title mt-3 mb-3 text-center">{{soLuongNhanVien}}</h5>
+                            </div>
+                            </div>    
+                        </div>
+                        <div class="main_chart-wrapper">
+                        <div id="chart-wrapper" >
+                            <canvas id="canvas"></canvas>
+                            <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+                            <script src="/js/thongke.js"></script>
+                        </div>
+                        </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/js/scripts.js"></script>
+    </body>
+</html>
